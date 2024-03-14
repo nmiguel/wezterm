@@ -15,18 +15,19 @@ config.background = {
 		source = { File = "C:/Users/Nuno Ramos/Pictures/Wallpapers/ocean.png" },
 	},
 	{
-		source = { Color = "rgba(1,12,42,0.0)" },
+		source = { Color = "rgba(0,0,0,0.5)" },
 		width = "100%",
 		height = "100%",
 	},
 }
 
 config.window_decorations = "RESIZE"
+config.window_close_confirmation = 'NeverPrompt'
 config.enable_tab_bar = false
 config.window_padding = {
-	left = 2,
-	right = 0,
-	top = 20,
+	left = 6,
+	right = 2,
+	top = 30,
 	bottom = "4px",
 }
 
