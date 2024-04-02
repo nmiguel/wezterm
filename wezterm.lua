@@ -3,11 +3,14 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local mux = wezterm.mux
 
--- This will hold the configuration.
+-- This table will hold the configuration.
 local config = wezterm.config_builder()
 
+config.default_domain = 'WSL:Ubuntu-22.04'
+-- This will hold the configuration.
+
 -- Configure font and font size
-config.font = wezterm.font("Consolas Nerd Font", { weight = "Regular", italic = false })
+config.font = wezterm.font_with_fallback({ "Consolas Nerd Font", "Symbols Nerd Font Mono", "Noto Color Emoji"})
 config.font_size = 17
 
 -- Setting the background image and its opacity
