@@ -10,7 +10,7 @@ config.wsl_domains = {
     {
         name = "WSL:Ubuntu-22.04",
         distribution = "Ubuntu-22.04",
-        default_prog = { "tmux" },
+        -- default_prog = { "tmux" },
     }
 }
 config.default_domain = 'WSL:Ubuntu-22.04'
@@ -31,6 +31,13 @@ config.background = {
         height = "100%",
     },
 }
+
+config.colors = require("./theme")
+
+local tabbar = require("tabBar")
+tabbar.apply_to_config(config)
+local keys = require("keybinds")
+keys.apply_to_config(config)
 
 -- config.color_scheme = 'AdventureTime'
 config.window_decorations = "RESIZE"
@@ -54,35 +61,28 @@ table.insert(launch_menu, {
 
 config.launch_menu = launch_menu
 
+
+
+local workspaces = require("workspaces")
+
+
+
 --Remember size
 wezterm.on("gui-startup", function(cmd)
     local tab, pane, window = mux.spawn_window(cmd or {})
     window:gui_window():maximize()
+    workspaces.loadWorkspaces()
 end)
 
-
-config.keys = {
-    {
-        key = "v",
-        mods = "CTRL",
-        action = wezterm.action.PasteFrom("Clipboard"),
-    },
-    {
-        key = "t",
-        mods = "SHIFT|ALT",
-        action = act.SpawnTab("CurrentPaneDomain"),
-    },
-    { key = "h", mods = "SHIFT|ALT", action = act.ActivateTabRelative(-1) },
-    { key = "l", mods = "SHIFT|ALT", action = act.ActivateTabRelative(1) },
-    {
-        key = "d",
-        mods = "SHIFT|ALT",
-        action = wezterm.action.CloseCurrentTab({ confirm = true }),
-    },
-    -- Show launcher for workspaces
-    { key = 'o', mods = 'SHIFT|ALT', action = wezterm.action.ShowLauncherArgs {
-        flags = "FUZZY|WORKSPACES",
-    }},
-}
+wezterm.on('save-workspaces', function ()
+  local activeWorkspace = wezterm.mux.get_active_workspace()
+  print(wezterm.mux.all_windows())
+  for _, window in ipairs(wezterm.mux.all_windows()) do
+    if window:get_workspace() == activeWorkspace then
+      window:gui_window():toast_notification('(Workspaces)', 'Saving workspaces...', nil, 5000)
+    end
+  end
+  workspaces.saveWorkspaces()
+end)
 
 return config
