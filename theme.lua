@@ -5,7 +5,7 @@ local pallette = require("pallette")
 colors.foreground = pallette.white
 colors.cursor_bg = pallette.white
 colors.cursor_fg = pallette.yellow
-colors.split = pallette.red
+colors.split = pallette.white
 colors.copy_mode_active_highlight_bg = { Color = pallette.orange}
 
 -- tab bar
