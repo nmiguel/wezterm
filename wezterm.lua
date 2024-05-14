@@ -19,56 +19,24 @@ config.debug_key_events=true
 
 -- Configure font and font size
 config.font = wezterm.font_with_fallback({ "Consolas Nerd Font", "Symbols Nerd Font Mono", "Noto Color Emoji" })
-config.font_size = 17
+config.font_size = 16
 
--- Setting the background image and its opacity
-config.background = {
-	{
-		source = {
-			File = require("../lib/files").getRandomFileByExtension(
-				"wallpapers/",
-				{ "png", "jpg", "jpeg", "gif"}
-			),
-		},
-	},
-	{
-		source = {
-			Gradient = {
-				colors = {
-					"rgba(0.5, 0.5, 0.5, 0.4)",
-					"rgba(0.5, 0.5, 0.5, 0.55)",
-					"rgba(0.5, 0.5, 0.5, 0.65)",
-				},
-				orientation = {
-					Radial = {
-						cx = 1,
-						cy = 0.5,
-						radius = 0.5,
-					},
-				},
-			},
-		},
-		width = "100%",
-		height = "100%",
-	},
-	-- {
-	--     source = { Color = "rgba(0,0,0,0.5)" },
-	--     width = "100%",
-	--     height = "100%",
-	-- },
-}
+-- config.background = require("background").solid()
+config.background = require("background").image()
+
 
 config.colors = require("./theme")
 
 local tabbar = require("tabBar")
 tabbar.apply_to_config(config)
+config.show_new_tab_button_in_tab_bar = false
 local keys = require("keybinds")
 keys.apply_to_config(config)
 
 -- config.color_scheme = 'AdventureTime'
 config.window_decorations = "RESIZE"
 config.window_close_confirmation = "NeverPrompt"
-config.hide_mouse_cursor_when_typing = false
+config.hide_mouse_cursor_when_typing = true
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true

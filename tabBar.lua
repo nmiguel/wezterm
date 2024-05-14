@@ -77,7 +77,7 @@ function module.apply_to_config(config)
 
       local is_last_tab = #tabs - 1 == tab.tab_index
       if is_last_tab then
-        right_edge_background = pallette.black
+        right_edge_background = pallette.clear
       end
 
       local title = tab_title(tab)

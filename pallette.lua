@@ -11,6 +11,7 @@ local pallette = {
 	white = "#dfdfe0",
 	orange = "#3DDBD9",
 	pink = "#FF7EB6",
+    clear = "rgba(0, 0, 0, 0)",
 }
 
 return pallette
