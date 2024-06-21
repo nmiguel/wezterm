@@ -10,6 +10,7 @@ config.wsl_domains = {
 	{
 		name = "WSL:Ubuntu-22.04",
 		distribution = "Ubuntu-22.04",
+        default_cwd = "~",
 		-- default_prog = { "tmux" },
 	},
 }
@@ -33,7 +34,7 @@ config.show_new_tab_button_in_tab_bar = false
 local keys = require("keybinds")
 keys.apply_to_config(config)
 
--- config.color_scheme = 'AdventureTime'
+config.color_scheme = 'BlueDolphin'
 config.window_decorations = "RESIZE"
 config.window_close_confirmation = "NeverPrompt"
 config.hide_mouse_cursor_when_typing = true
