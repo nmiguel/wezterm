@@ -30,8 +30,8 @@ function M.image()
 			source = {
 				File = file_path,
 			},
-			width = "100%",
-			height = "100%",
+			-- width = "100%",
+			-- height = "100%",
 		},
 		-- {
 		-- 	source = {
@@ -57,9 +57,11 @@ function M.image()
 			source = {
 				Color = "#131a21",
 			},
-			width = "100%",
-			height = "100%",
-            opacity = 0.75,
+			width = "110%",
+            horizontal_offset = "-5%",
+			height = "110%",
+            vertical_offset = "-5%",
+            opacity = 0.9,
 		},
 	}
 end
