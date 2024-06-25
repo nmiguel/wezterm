@@ -10,21 +10,26 @@ config.wsl_domains = {
 	{
 		name = "WSL:Ubuntu-22.04",
 		distribution = "Ubuntu-22.04",
-        default_cwd = "~",
+		default_cwd = "~",
 		-- default_prog = { "tmux" },
 	},
 }
 config.default_domain = "WSL:Ubuntu-22.04"
-config.debug_key_events=true
+config.debug_key_events = true
 -- This will hold the configuration.
 
 -- Configure font and font size
-config.font = wezterm.font_with_fallback({ "Consolas Nerd Font", "Symbols Nerd Font Mono", "Noto Color Emoji" })
+config.font = wezterm.font_with_fallback({
+	{ family = "Consolas Nerd Font"},
+	{ family = "Symbols Nerd Font Mono"},
+	{ family = "Noto Color Emoji"},
+})
 config.font_size = 16
+config.underline_position = "-3px"
+config.underline_thickness = 3
 
 -- config.background = require("background").solid()
 config.background = require("background").image()
-
 
 config.colors = require("./theme")
 
@@ -34,7 +39,7 @@ config.show_new_tab_button_in_tab_bar = false
 local keys = require("keybinds")
 keys.apply_to_config(config)
 
-config.color_scheme = 'BlueDolphin'
+config.color_scheme = "BlueDolphin"
 config.window_decorations = "RESIZE"
 config.window_close_confirmation = "NeverPrompt"
 config.hide_mouse_cursor_when_typing = true
