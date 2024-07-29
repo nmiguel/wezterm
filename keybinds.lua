@@ -31,15 +31,15 @@ function module.apply_to_config(config)
 		{
 			key = "d",
 			mods = "ALT",
-			action = wezterm.action.CloseCurrentTab({ confirm = true }),
+			action = wezterm.action.CloseCurrentPane({ confirm = true }),
 		},
 
 		--Sessionizer
-		{ key = "f", mods = "ALT", action = wezterm.action_callback(sessionizer.toggle) },
+		{ key = "g", mods = "ALT", action = wezterm.action_callback(sessionizer.toggle) },
 		{
 			key = "w",
 			mods = "ALT",
-			action = wezterm.action.CloseCurrentPane({ confirm = true }),
+			action = wezterm.action.CloseCurrentTab({ confirm = true }),
 		},
 
 		{ key = "Space", mods = "CTRL", action = wezterm.action.ActivateCopyMode },
