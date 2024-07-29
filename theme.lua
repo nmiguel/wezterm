@@ -1,6 +1,9 @@
 local colors = {}
 local pallette = require("pallette")
 
+local wezterm = require("wezterm")
+colors, _= wezterm.color.load_scheme(wezterm.home_dir .. "/.config/wezterm/theme.toml")
+
 -- colors.background = pallette.black
 colors.foreground = pallette.white
 colors.cursor_bg = pallette.white
