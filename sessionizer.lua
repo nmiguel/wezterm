@@ -41,10 +41,10 @@ M.toggle = function(window, pane)
 
 	success = success and success2
 	stdout = stdout .. stdout2
-    stderr = stderr .. stderr2
+	stderr = stderr .. stderr2
 
-    -- NOTE: Add more paths here
-    stdout = stdout .. "/home/nomig/projects/personal/.dotfiles/.config/nvim\n"
+	-- NOTE: Add more paths here
+	stdout = stdout .. "/home/nomig/projects/personal/.dotfiles/.config/nvim\n"
 
 	if not success then
 		wezterm.log_error("Failed to run fd: " .. stderr)

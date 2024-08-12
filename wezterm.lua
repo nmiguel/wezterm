@@ -20,16 +20,16 @@ config.debug_key_events = true
 
 -- Configure font and font size
 config.font = wezterm.font_with_fallback({
-	{ family = "Consolas Nerd Font"},
-	{ family = "Symbols Nerd Font Mono"},
-	{ family = "Noto Color Emoji"},
+	{ family = "Consolas Nerd Font" },
+	{ family = "Symbols Nerd Font Mono" },
+	{ family = "Noto Color Emoji" },
 })
 config.font_size = 16
 config.underline_position = "-3px"
 config.underline_thickness = 3
 
--- config.background = require("background").solid()
-config.background = require("background").image()
+local background = require("background")
+config.background = background.image()
 
 config.colors = require("./theme")
 

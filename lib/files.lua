@@ -31,7 +31,7 @@ function M.getRandomFileByExtension(path, extensions)
         end
 		local matchingFile = (directoryPath .. matchingFiles[wezterm.GLOBAL.background_index]):gsub("\\", "/")
 		wezterm.log_info("Random file selected: " .. matchingFile)
-		return matchingFile
+        return matchingFile
 	else
 		print("No files found with the specified extensions.")
 		return nil, "No files found with the specified extensions."

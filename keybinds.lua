@@ -2,6 +2,7 @@
 local wezterm = require("wezterm")
 local module = {}
 local sessionizer = require("sessionizer")
+local background = require("background")
 
 local pallette = require("pallette")
 
@@ -22,6 +23,7 @@ function module.apply_to_config(config)
 			mods = "ALT",
 			action = wezterm.action_callback(function(_, _)
 				wezterm.GLOBAL.background_index = wezterm.GLOBAL.background_index + 1
+				wezterm.GLOBAL.background_image = background.random_image()
                 wezterm.reload_configuration()
 			end),
 		},
@@ -36,6 +38,13 @@ function module.apply_to_config(config)
 
 		--Sessionizer
 		{ key = "g", mods = "ALT", action = wezterm.action_callback(sessionizer.toggle) },
+		{
+			key = "t",
+			mods = "ALT",
+			action = wezterm.action_callback(function(window, pane)
+				background.select(window, pane, config)
+			end),
+		},
 		{
 			key = "w",
 			mods = "ALT",
