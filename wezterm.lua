@@ -24,7 +24,7 @@ config.font = wezterm.font_with_fallback({
 	{ family = "Symbols Nerd Font Mono" },
 	{ family = "Noto Color Emoji" },
 })
-config.font_size = 16
+config.font_size = 15
 config.underline_position = "-3px"
 config.underline_thickness = 3
 
@@ -38,6 +38,9 @@ tabbar.apply_to_config(config)
 config.show_new_tab_button_in_tab_bar = false
 local keys = require("keybinds")
 keys.apply_to_config(config)
+
+config.max_fps = 165
+-- config.front_end = "WebGpu"
 
 config.color_scheme = "BlueDolphin"
 config.window_decorations = "RESIZE"
