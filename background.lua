@@ -60,11 +60,12 @@ M.select = function(window, pane, config)
 	local success, stdout, stderr = wezterm.run_child_process({
 		"wsl.exe",
 		"/home/nomig/.local/bin/fd",
+        "-L",
 		"-HI",
 		"-tf",
 		".",
 		"--full-path",
-		"--max-depth=1",
+		"--max-depth=2",
 		"--min-depth=0",
 		path,
 	})
@@ -75,9 +76,8 @@ M.select = function(window, pane, config)
 	end
 
 	for line in stdout:gmatch("([^\n]*)\n?") do
-		local image = line:gsub("/.git/$", "")
-		local id = image:gsub(".*/", "")
-		local label = id
+		local id = line:gsub(".*/wallpapers/", "")
+		local label = id:gsub("-", " "):gsub("_", " "):match("(.+)%..+$")
 		id = path .. "/" .. id
         id = id:gsub("/mnt/c", "C:")
 		table.insert(images, { label = tostring(label), id = tostring(id) })
