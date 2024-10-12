@@ -24,7 +24,7 @@ function module.apply_to_config(config)
 
   config.use_fancy_tab_bar = false
   config.tab_bar_at_bottom = false
-  config.tab_max_width = 20
+  config.tab_max_width = 40
 
 
   -- The filled in variant of the < symbol
@@ -71,7 +71,6 @@ function module.apply_to_config(config)
 
     local splittedTitle = mysplit(tab_info.active_pane.title, '/')
     splittedTitle = splittedTitle[#splittedTitle]
-    wezterm.log_info("Title: " .. splittedTitle)
     if splittedTitle == "v" or splittedTitle == "nvim" then
         return "nvim: " .. get_current_working_dir(tab_info)
     end

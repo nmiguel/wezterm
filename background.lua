@@ -2,37 +2,40 @@ local M = {}
 local wezterm = require("wezterm")
 local act = wezterm.action
 
-function M.solid()
-	return {
-		{
-			source = {
-				Gradient = {
-					colors = {
-						"#131a21",
-					},
-					orientation = {
-						Radial = {
-							cx = 1,
-							cy = 0.75,
-							radius = 0.5,
-						},
-					},
-				},
-			},
-			width = "100%",
-			height = "100%",
-		},
-	}
-end
+local color_prefix = "Solid Color: "
+
+local colors = {
+	Dark_Blue = "#131a21",
+	Dark_Purple = "#111621",
+}
 
 M.random_image = function()
 	return require("../lib/files").getRandomFileByExtension("wallpapers/", { "png", "jpg", "jpeg", "gif" })
 end
 
+M.solid = function(color)
+	wezterm.log_info("New background color: " .. color)
+	return {
+		{
+			source = {
+				Color = color,
+			},
+			width = "110%",
+			horizontal_offset = "-5%",
+			height = "110%",
+			vertical_offset = "-5%",
+			opacity = 1,
+		},
+	}
+end
 
 M.image = function()
-    wezterm.GLOBAL.background_image = wezterm.GLOBAL.background_image or M.random_image()
-    wezterm.log_info("New background: " .. wezterm.GLOBAL.background_image)
+	wezterm.GLOBAL.background_image = wezterm.GLOBAL.background_image or M.random_image()
+	if wezterm.GLOBAL.background_image:match("^#") then
+		return M.solid(wezterm.GLOBAL.background_image)
+	end
+
+	wezterm.log_info("New background: " .. wezterm.GLOBAL.background_image)
 	return {
 		{
 			source = {
@@ -60,7 +63,7 @@ M.select = function(window, pane, config)
 	local success, stdout, stderr = wezterm.run_child_process({
 		"wsl.exe",
 		"/home/nomig/.local/bin/fd",
-        "-L",
+		"-L",
 		"-HI",
 		"-tf",
 		".",
@@ -79,21 +82,38 @@ M.select = function(window, pane, config)
 		local id = line:gsub(".*/wallpapers/", "")
 		local label = id:gsub("-", " "):gsub("_", " "):match("(.+)%..+$")
 		id = path .. "/" .. id
-        id = id:gsub("/mnt/c", "C:")
+		id = id:gsub("/mnt/c", "C:")
 		table.insert(images, { label = tostring(label), id = tostring(id) })
+	end
+
+	-- join with solid colors, prefix them with color-
+	for color, hex in pairs(colors) do
+		table.insert(images, { label = color_prefix .. color, id = hex })
 	end
 
 	window:perform_action(
 		act.InputSelector({
 			action = wezterm.action_callback(function(_, _, id, label)
+				wezterm.log_info("label: " .. label)
+				wezterm.log_info("id: " .. id)
 				if not id and not label then
 					wezterm.log_info("Cancelled")
+					return
+				end
+				for k in pairs(config.background) do
+					config.background[k] = nil
+				end
+
+				if label:match("^" .. color_prefix) then
+					wezterm.log_info("Selected " .. label)
+					wezterm.log_info("Using as background " .. id)
+					wezterm.GLOBAL.background_image = id
 				else
 					wezterm.log_info("Selected " .. label)
 					wezterm.log_info("Using as background " .. id)
-                    wezterm.GLOBAL.background_image = id
-                    wezterm.reload_configuration()
+					wezterm.GLOBAL.background_image = id
 				end
+				wezterm.reload_configuration()
 			end),
 			fuzzy = true,
 			title = "Select background",
