@@ -15,18 +15,30 @@ config.wsl_domains = {
 	},
 }
 config.default_domain = "WSL:Ubuntu-22.04"
+config.launch_menu = {
+	{
+		label = "Windows Terminal",
+		args = { "wt.exe" },
+	},
+}
 config.debug_key_events = true
 -- This will hold the configuration.
 
 -- Configure font and font size
 config.font = wezterm.font_with_fallback({
-	{ family = "Consolas Nerd Font" },
+	-- { family = "Cascadia Mono" },
+	-- { family = "Hack Nerd Font Mono" },
+	-- { family = "Monaspace Neon" },
+	{ family = "JetBrains Mono" },
+	-- { family = "Monaspace Argon" },
+	-- { family = "Consolas Nerd Font" },
 	{ family = "Symbols Nerd Font Mono" },
 	{ family = "Noto Color Emoji" },
 })
-config.font_size = 15
+config.font_size = 14
 config.underline_position = "-3px"
 config.underline_thickness = 3
+config.harfbuzz_features = { "calt=0" }
 
 local background = require("background")
 config.background = background.image()
