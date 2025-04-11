@@ -4,7 +4,7 @@ local act = wezterm.action
 
 local color_prefix = "Solid Color: "
 
-local colors = {
+M.Colors = {
 	Dark_Blue = "#131a21",
 	Dark_Purple = "#111621",
 }
@@ -87,7 +87,7 @@ M.select = function(window, pane, config)
 	end
 
 	-- join with solid colors, prefix them with color-
-	for color, hex in pairs(colors) do
+	for color, hex in pairs(M.Colors) do
 		table.insert(images, { label = color_prefix .. color, id = hex })
 	end
 

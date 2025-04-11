@@ -1,6 +1,5 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
-local act = wezterm.action
 local mux = wezterm.mux
 
 -- This table will hold the configuration.
@@ -8,10 +7,16 @@ local config = wezterm.config_builder()
 
 config.wsl_domains = {
 	{
+		name = "WSL:Ubuntu-24.04",
+		distribution = "Ubuntu-24.04",
+		default_cwd = "~",
+		default_prog = { "tmux" },
+	},
+	{
 		name = "WSL:Ubuntu-22.04",
 		distribution = "Ubuntu-22.04",
 		default_cwd = "~",
-		-- default_prog = { "tmux" },
+		default_prog = { "tmux" },
 	},
 }
 config.default_domain = "WSL:Ubuntu-22.04"
@@ -26,22 +31,21 @@ config.debug_key_events = true
 
 -- Configure font and font size
 config.font = wezterm.font_with_fallback({
+	{ family = "CommitMono" },
+	{ family = "Symbols Nerd Font Mono" },
+	{ family = "Noto Color Emoji" },
 	-- { family = "Cascadia Mono" },
 	-- { family = "Hack Nerd Font Mono" },
 	-- { family = "Monaspace Neon" },
-	{ family = "JetBrains Mono" },
+	-- { family = "JetBrains Mono" },
 	-- { family = "Monaspace Argon" },
 	-- { family = "Consolas Nerd Font" },
-	{ family = "Symbols Nerd Font Mono" },
-	{ family = "Noto Color Emoji" },
 })
-config.font_size = 14
-config.underline_position = "-3px"
-config.underline_thickness = 3
-config.harfbuzz_features = { "calt=0" }
+config.font_size = 16
+config.underline_thickness = 4
 
 local background = require("background")
-config.background = background.image()
+config.background = background.solid(background.Colors.Dark_Blue)
 
 config.colors = require("./theme")
 
@@ -54,6 +58,8 @@ keys.apply_to_config(config)
 config.max_fps = 165
 -- config.front_end = "WebGpu"
 
+config.cursor_thickness = 2
+
 config.color_scheme = "BlueDolphin"
 config.window_decorations = "RESIZE"
 config.window_close_confirmation = "NeverPrompt"
@@ -62,10 +68,10 @@ config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 config.window_padding = {
-	left = 20,
-	right = 20,
-	top = 35,
-	bottom = 15,
+	left = 10,
+	right = 10,
+	top = 5,
+	bottom = 0,
 }
 
 local launch_menu = {}
@@ -78,7 +84,7 @@ config.launch_menu = launch_menu
 
 --Remember size
 wezterm.on("gui-startup", function(cmd)
-	local tab, pane, window = mux.spawn_window(cmd or {})
+	local _, _, window = mux.spawn_window(cmd or {})
 	window:gui_window():maximize()
 end)
 
