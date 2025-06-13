@@ -24,7 +24,7 @@ M.solid = function(color)
 			horizontal_offset = "-5%",
 			height = "110%",
 			vertical_offset = "-5%",
-			opacity = 1,
+			opacity = 0.75,
 		},
 	}
 end

@@ -5,21 +5,25 @@ local mux = wezterm.mux
 -- This table will hold the configuration.
 local config = wezterm.config_builder()
 
-config.wsl_domains = {
-	{
-		name = "WSL:Ubuntu-24.04",
-		distribution = "Ubuntu-24.04",
-		default_cwd = "~",
-		default_prog = { "tmux" },
-	},
-	{
-		name = "WSL:Ubuntu-22.04",
-		distribution = "Ubuntu-22.04",
-		default_cwd = "~",
-		default_prog = { "tmux" },
-	},
-}
-config.default_domain = "WSL:Ubuntu-22.04"
+-- config.enable_wayland = false
+
+-- config.wsl_domains = {
+-- 	{
+-- 		name = "WSL:Ubuntu-24.04",
+-- 		distribution = "Ubuntu-24.04",
+-- 		default_cwd = "~",
+-- 		default_prog = { "tmux" },
+-- 	},
+-- 	{
+-- 		name = "WSL:Ubuntu-22.04",
+-- 		distribution = "Ubuntu-22.04",
+-- 		default_cwd = "~",
+-- 		default_prog = { "tmux" },
+-- 	},
+-- }
+
+config.default_prog = { "tmux" }
+-- config.default_domain = "WSL:Ubuntu-22.04"
 config.launch_menu = {
 	{
 		label = "Windows Terminal",
@@ -61,7 +65,7 @@ config.max_fps = 165
 config.cursor_thickness = 2
 
 config.color_scheme = "BlueDolphin"
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
 config.window_close_confirmation = "NeverPrompt"
 config.hide_mouse_cursor_when_typing = true
 config.hide_tab_bar_if_only_one_tab = true
@@ -71,7 +75,7 @@ config.window_padding = {
 	left = 10,
 	right = 10,
 	top = 5,
-	bottom = 0,
+    bottom = 0,
 }
 
 local launch_menu = {}
