@@ -6,11 +6,11 @@ local background = require("background")
 
 function module.apply_to_config(config)
 	config.keys = {
-		{
-			key = "v",
-			mods = "CTRL",
-			action = wezterm.action.PasteFrom("Clipboard"),
-		},
+		-- {
+		-- 	key = "v",
+		-- 	mods = "CTRL",
+		-- 	action = wezterm.action.PasteFrom("Clipboard"),
+		-- },
 		{
 			key = "r",
 			mods = "ALT|SHIFT",
