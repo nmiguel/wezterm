@@ -31,6 +31,7 @@ config.launch_menu = {
 	},
 }
 config.debug_key_events = true
+config.warn_about_missing_glyphs = false
 -- This will hold the configuration.
 
 -- Configure font and font size
@@ -38,6 +39,7 @@ config.font = wezterm.font_with_fallback({
 	{ family = "CommitMono" },
 	{ family = "Symbols Nerd Font Mono" },
 	{ family = "Noto Color Emoji" },
+	{ family = "CaskaydiaMono Nerd Font" },
 	-- { family = "Cascadia Mono" },
 	-- { family = "Hack Nerd Font Mono" },
 	-- { family = "Monaspace Neon" },
@@ -75,7 +77,7 @@ config.window_padding = {
 	left = 10,
 	right = 10,
 	top = 5,
-    bottom = 0,
+	bottom = 0,
 }
 
 local launch_menu = {}
